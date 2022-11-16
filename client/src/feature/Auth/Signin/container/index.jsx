@@ -4,7 +4,7 @@ import { SigninForm } from "../components/SigninForm";
 import style from "./index.module.scss";
 import { connect } from "react-redux";
 import { signinRequest } from "../actions";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "./../../../../helpers/withRouter";
 
 const Signin = props => {
   useEffect(() => {

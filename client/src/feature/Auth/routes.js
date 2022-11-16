@@ -1,7 +1,7 @@
-import { SigninContainer } from "./Signin";
-import { SignupContainer } from "./Signup";
-import { RestorePasswordContainer } from "./RestorePassword";
-import { ConfirmRestorePasswordContainer } from "./ConfirmRestorePassword";
+import { SigninContainer } from "./../Auth/Signin";
+import { SignupContainer } from "./../Auth/Signup";
+import { RestorePasswordContainer } from "./../Auth/RestorePassword";
+import { ConfirmRestorePasswordContainer } from "./../Auth/ConfirmRestorePassword";
 
 export const routes = [
   {

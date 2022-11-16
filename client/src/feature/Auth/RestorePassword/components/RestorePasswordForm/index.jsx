@@ -1,41 +1,33 @@
 import React from "react";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Input, Button } from "antd";
+import Icon from '@ant-design/icons';
 import style from "./index.module.scss";
 import { Link } from "react-router-dom";
 
-const RestorePasswordFormComponent = props => {
-  const { getFieldDecorator } = props.form;
+export const RestorePasswordForm = props => {
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
+  const onFinish = values => {
         props.onSubmit(values);
-      }
-    });
   };
 
   return (
-    <Form onSubmit={handleSubmit} className={style.restorePassword}>
+    <Form onFinish={onFinish} className={style.restorePassword}>
       <h1 className={style.authHeader}>Restore password</h1>
       <Form.Item
         {...props.isError && {
           help: props.errorMessage,
           validateStatus: "error"
         }}
+        name="email"
+        rules={[
+          { required: true, message: "Please input your email!" },
+          { type: "email", message: "The input is not valid E-mail!" }
+        ]}
       >
-        {getFieldDecorator("email", {
-          rules: [
-            { required: true, message: "Please input your email!" },
-            { type: "email", message: "The input is not valid E-mail!" }
-          ]
-        })(
           <Input
             prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
             placeholder="email"
           />
-        )}
       </Form.Item>
       <Form.Item>
         <Button
@@ -54,7 +46,3 @@ const RestorePasswordFormComponent = props => {
     </Form>
   );
 };
-
-export const RestorePasswordForm = Form.create({ name: "signinForm" })(
-  RestorePasswordFormComponent
-);

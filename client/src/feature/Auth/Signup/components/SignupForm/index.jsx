@@ -1,55 +1,41 @@
 import React from "react";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Input, Button } from "antd";
+import Icon from '@ant-design/icons';
 import style from "./index.module.scss";
 import { Link } from "react-router-dom";
 
-const SignupFormComponent = props => {
-  const { getFieldDecorator } = props.form;
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
+const SignupForm = props => {
+  const onFinish = values => {
         props.onSubmit(values);
-      }
-    });
-  };
+    }
 
   return (
-    <Form onSubmit={handleSubmit} className={style.signupForm}>
+    <Form onFinish={onFinish} className={style.signupForm}>
       <h1 className={style.authHeader}>Create account</h1>
-      <Form.Item>
-        {getFieldDecorator("name", {
-          rules: [
+      <Form.Item name="name" rules={[
             { required: true, message: "Please input your name!" },
             { min: 2, message: "Min length name 2 symbols!" },
             { max: 30, message: "Max length name 30 symbols!" }
-          ]
-        })(
+          ]}>
           <Input
             prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
             placeholder="name"
           />
-        )}
       </Form.Item>
       <Form.Item
         {...props.isError && {
           help: props.errorMessage,
           validateStatus: "error"
         }}
+        name="email" rules={[
+          { required: true, message: "Please input your email!" },
+          { type: "email", message: "The input is not valid E-mail!" }
+        ]}
       >
-        {getFieldDecorator("email", {
-          rules: [
-            { required: true, message: "Please input your email!" },
-            { type: "email", message: "The input is not valid E-mail!" }
-          ]
-        })(
           <Input
             prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
             placeholder="email"
           />
-        )}
       </Form.Item>
       <Form.Item>
         <Button
@@ -69,6 +55,4 @@ const SignupFormComponent = props => {
   );
 };
 
-export const SignupForm = Form.create({ name: "signinForm" })(
-  SignupFormComponent
-);
+export default SignupForm

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu } from "antd";
+import Icon from '@ant-design/icons';
 import PropTypes from "prop-types";
 
 const { Sider } = Layout;

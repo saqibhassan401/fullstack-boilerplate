@@ -1,52 +1,40 @@
 import React from "react";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Input, Button } from "antd";
+import Icon from '@ant-design/icons';
 import style from "./index.module.scss";
 import { Link } from "react-router-dom";
 
-const SigninFormComponent = props => {
-  const { getFieldDecorator } = props.form;
+export const SigninForm = props => {
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
+  const onFinish = values=> {
         props.onSubmit(values);
-      }
-    });
   };
 
   return (
-    <Form onSubmit={handleSubmit} className={style.signinForm}>
+    <Form onFinish={onFinish} className={style.signinForm}>
       <h1 className={style.authHeader}>Sign in</h1>
-      <Form.Item>
-        {getFieldDecorator("email", {
-          rules: [
+      <Form.Item name="email" rules={[
             { required: true, message: "Please input your email!" },
             { type: "email", message: "The input is not valid E-mail!" }
-          ]
-        })(
+          ]}>
           <Input
             prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
             placeholder="email"
           />
-        )}
       </Form.Item>
       <Form.Item
         {...props.isError && {
           help: props.errorMessage,
           validateStatus: "error"
         }}
+        name="password"
+        rules={[{ required: true, message: "Please input your password!" }]}
       >
-        {getFieldDecorator("password", {
-          rules: [{ required: true, message: "Please input your password!" }]
-        })(
           <Input
             prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
             type="password"
             placeholder="Password"
           />
-        )}
       </Form.Item>
       <Form.Item>
         <Button
@@ -65,7 +53,3 @@ const SigninFormComponent = props => {
     </Form>
   );
 };
-
-export const SigninForm = Form.create({ name: "signinForm" })(
-  SigninFormComponent
-);

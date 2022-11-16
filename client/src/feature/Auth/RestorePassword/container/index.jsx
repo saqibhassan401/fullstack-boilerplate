@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { RestorePasswordForm } from "../components/RestorePasswordForm";
 import { connect } from "react-redux";
 import { restorePasswordRequest } from "../actions";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import {withRouter} from './../../../../helpers/withRouter'
 import style from "./index.module.scss";
 
 const RestorePassword = props => {

@@ -21,8 +21,9 @@ const normaliseErrorMessages = errors => {
 
 const validate = async (data, schema) => {
   try {
-    const ajv = new Ajv({ allErrors: true, jsonPointers: true });
+    const ajv = new Ajv({ allErrors: true});
     AjvErrors(ajv);
+    ajv.addFormat("email", /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
     const validateFunction = ajv.compile(schema);
 
     const valid = await validateFunction(data);

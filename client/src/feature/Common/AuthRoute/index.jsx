@@ -1,17 +1,17 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { getAuthUserData } from "./../../../helpers/auth";
 
-const AuthRouteContainer = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        rest.isAuth ? <Component {...props} /> : <Redirect to="/" />
-      }
-    />
-  );
+const AuthRouteContainer = ({ children}) => {
+  const userAuth = getAuthUserData();
+  if(userAuth){
+    return children 
+  }
+  else{
+    return <Navigate to={'/'}  />;
+  }
 };
 
 AuthRouteContainer.propTypes = {
