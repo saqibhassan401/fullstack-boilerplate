@@ -34,7 +34,7 @@ const UserSchema = new Schema(
   }
 );
 
-mongoose.set("useCreateIndex", true);
+// mongoose.set("useCreateIndex", true);
 UserSchema.plugin(uniqueValidator);
 
 export default mongoose.model("User", UserSchema);
