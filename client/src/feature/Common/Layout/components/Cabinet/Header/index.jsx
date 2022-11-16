@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Layout, Menu, Icon } from "antd";
-
+import { Layout, Menu } from "antd";
+import Icon from '@ant-design/icons';
 import style from "./index.module.scss";
 
 const { SubMenu } = Menu;
